@@ -14,6 +14,11 @@ int vg_hook_sceDisplaySetFrameBuf_withWait(const SceDisplayFrameBuf *pParam, int
     sceDisplayWaitVblankStartMulti(2);
     return ret;
 }
+int vg_hook_sceDisplaySetFrameBuf_withWaitHalf(const SceDisplayFrameBuf *pParam, int sync) {
+    int ret = TAI_CONTINUE(int, g_main.hook_ref[0], pParam, sync);
+    sceDisplayWaitVblankStartMulti(1);
+    return ret;
+}
 int vg_hook_sceCtrlReadBufferPositive_peekPatched(int port, SceCtrlData *pad_data, int count) {
     return sceCtrlPeekBufferPositive(port, pad_data, count);
 }
@@ -43,8 +48,13 @@ static vg_io_status_t vg_hook_parse_common(
 
     if (!strncasecmp(&line[1], "sceDisplaySetFrameBuf_withWait", 30)) {
         *importNid = 0x7A410B64;
+        if(g_main.config.fps == FPS_30){
         *hookPtr = &vg_hook_sceDisplaySetFrameBuf_withWait;
-        *shallHook = g_main.config.fps_enabled == FT_ENABLED && g_main.config.fps == FPS_30;
+        }
+        else {
+        *hookPtr = &vg_hook_sceDisplaySetFrameBuf_withWaitHalf;
+        }
+        *shallHook = g_main.config.fps_enabled == FT_ENABLED;
         return ret;
     }
     if (!strncasecmp(&line[1], "sceCtrlReadBufferPositive_peekPatched", 37)) {

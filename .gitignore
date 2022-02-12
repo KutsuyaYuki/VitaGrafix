@@ -5,3 +5,11 @@ build/
 
 tests/interpreter
 tests/test_interpreter
+CMakeFiles/
+*.suprx
+*.out
+VitaGrafix
+*.velf
+CMakeCache.txt
+*.cmake
+Makefile
