@@ -8,6 +8,8 @@ VitaGrafix is a taiHEN plugin that allows you to change resolution and FPS cap o
 <br>
 <br>
 
+An attempt on a guide made by me: [Yuki's guide](http://wp.yuki.pet/?p=113#Obtaining-the-ELF-file-with-FAGDec)
+
 _____
 
 Licensed under [GNU GPL v3](https://github.com/Electry/VitaGrafix/blob/master/LICENSE.md)
